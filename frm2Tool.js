@@ -46,14 +46,14 @@ if (!rootDirectory) {
 }
 
 // Function to process each .frm file
-async function processFrmFile(filePath) {
+async function processFrmFile(filePath, outputPath) {
     const directory = path.dirname(filePath);
     const baseName = path.basename(filePath, '.frm');
-    const outputDir = path.join(directory, baseName);
+    const outputDir = path.join(outputPath, directory, baseName);
 
-    // Create a new directory for the output files
+    // Ensure the directory exists
     if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir);
+        fs.mkdirSync(path.dirname(outputDir), { recursive: true });
     }
 
     const reactFilePath = path.join(outputDir, `${baseName}.jsx`);
@@ -188,6 +188,9 @@ async function sendPromptToLLM(prompt) {
 
 // Function to write content to a file
 function writeToFile(filePath, content, fileDescription) {
+
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
   fs.writeFile(filePath, content, (err) => {
     if (err) {
       console.error(`Error writing ${fileDescription}:`, err);
@@ -197,8 +200,15 @@ function writeToFile(filePath, content, fileDescription) {
   });
 }
 
+// Ensure the output folder exists
+outputRootDirectory = path.join(rootDirectory, 'output')
+
+if (!fs.existsSync(outputRootDirectory)) {
+    fs.mkdirSync(outputRootDirectory);
+}
+
 // Start processing all .frm files in the root directory
 const frmFiles = getFrmFiles(rootDirectory);
 frmFiles.forEach((filePath) => {
-  processFrmFile(filePath);
+  processFrmFile(filePath, outputRootDirectory);
 });
