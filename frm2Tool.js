@@ -57,7 +57,7 @@ async function processFrmFile(filePath, outputPath) {
     }
 
     const reactFilePath = path.join(outputDir, `${baseName}.jsx`);
-    const cssFilePath = path.join(outputDir, `${baseName}.css`);
+    const cssFilePath = path.join(outputDir, `styles.css`);
     const reportFilePath = path.join(outputDir, `${baseName}_ConversionReport.md`);
 
   
@@ -159,7 +159,7 @@ Objective:
 Transform the code in the VB6 components into a new, fully functional React.js component, using only basic React libraries to convert forms from VB6.
 
 Deliverables:
-- ReactJS File: Include both the UI and logic code in a .jsx file.
+- ReactJS File: Include both the UI and logic code in a .jsx file also import the generated Stylesheet File.
 - Stylesheet File: Provide a separate stylesheet file (e.g., .css or .scss) used by the ReactJS file.
 - Report File: Create a report that contains the mapping table (old and new function and variable names) and notes about any code that couldn't be converted. Highlight any code blocks or dependencies that cannot be converted directly, especially if third-party libraries or specific features in the Frm file are incompatible with React.js.
 Include any recommendations for alternative approaches or potential workarounds where applicable.
