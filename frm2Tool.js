@@ -150,20 +150,28 @@ function parseVb6FormContent(content) {
 
 // Function to generate LLM prompt
 function generateLLMPrompt(components) {
-  return `Convert the following VB6 form components to a React.js application with the following requirements:
+  return `You are an expert coder's assistant, helping to transform legacy VB6 form files into modern React.js applications. Please use all of your knowledge and any relevant documentation available on the internet to assist in this transformation.
 
-Components:
-${JSON.stringify(components, null, 2)}
-
-Objective:
-Transform the code in the VB6 components into a new, fully functional React.js component, using only basic React libraries to convert forms from VB6.
-
-Deliverables:
-- ReactJS File: Include both the UI and logic code in a .jsx file also import the generated Stylesheet File.  Ensure that all logic functions (e.g., event handlers, validation, and other business logic) from the original VB6 code are properly implemented in the React component.
-- Stylesheet File: Provide a separate stylesheet file (e.g., .css or .scss) used by the ReactJS file.
-- Report File: Create a report that contains the mapping table (old and new function and variable names) and notes about any code that couldn't be converted. Highlight any code blocks or dependencies that cannot be converted directly, especially if third-party libraries or specific features in the Frm file are incompatible with React.js.
-Include any recommendations for alternative approaches or potential workarounds where applicable.
-`;
+  Convert the following VB6 form components to a React.js application with the following requirements:
+  
+  Components:
+  ${JSON.stringify(components, null, 2)}
+  
+  Objective:
+  Transform the code in the VB6 components into a new, fully functional React.js component, including both the UI and any logic functions present in the original VB6 code. Use only basic React libraries to convert forms from VB6.
+  
+  You should take into account:
+  - Proper React component structuring, ensuring best practices are used.
+  - Converting all VB6 logic functions, event handlers, and control flow into appropriate React hooks or class methods.
+  - Identifying and addressing any potential challenges or discrepancies in the logic during the conversion.
+  - Utilizing your knowledge of how React manages state and events compared to VB6 to ensure equivalent functionality is achieved.
+  
+  Deliverables:
+  - ReactJS File: Include both the UI and logic code in a .jsx file and also import the generated Stylesheet File. Ensure that all logic functions (e.g., event handlers, validation, and other business logic) from the original VB6 code are properly implemented in the React component.
+  - Stylesheet File: Provide a separate stylesheet file (e.g., .css or .scss) used by the ReactJS file.
+  - Report File: Create a report that contains the mapping table (old and new function and variable names) and notes about any code that couldn't be converted, including suggestions on how to handle it in the React component.
+  
+  Remember, you are acting as a coding assistant, and your goal is to provide the best possible transformation using modern coding techniques.`;
 }
 
 // Function to send prompt to LLM
